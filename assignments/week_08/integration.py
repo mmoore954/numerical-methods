@@ -2,14 +2,33 @@
 # this module will contain functions for numerical integration
 
 
-def trapezoidal_rule():
-    #write the arguments, docstring, and actual code of this function
+def trapezoidal_rule(f, a, b, N):
+    h = (b - a) / N
+    
+    total = f(a) + f(b)
+    
+    for i in range(1, N):
+        x = a + i * h
+        total += 2 * f(x)
+    
+    return (h / 2) * total
 
-    return
 
 
-
-def simpsons_rule():
-    #write the arguments, docstring, and actual code of this function
-
-    return
+def simpsons_rule(f, a, b, N):
+    if N % 2 != 0:
+        raise ValueError("N must be even for Simpson's rule")
+    
+    h = (b - a) / N
+    
+    total = f(a) + f(b)
+    
+    for i in range(1, N):
+        x = a + i * h
+        
+        if i % 2 == 0:
+            total += 2 * f(x)
+        else:
+            total += 4 * f(x)
+    
+    return (h / 3) * total
